@@ -81,10 +81,27 @@
     zoom: var(--vw-page-zoom, 1);
   }
 
-  /* The surround only. section.docx is the page itself, and a page is paper: it stays
-     white here for the same reason a PDF page does. */
+  /* True OLED Dark Night Mode for Word Documents */
   @media (prefers-color-scheme: dark) {
-    .docx-wrapper > section.docx { box-shadow: 0 1px 8px rgba(0,0,0,0.6) !important; }
+    .docx-wrapper > section.docx {
+      background: #090d13 !important;
+      color: #f1f5f9 !important;
+      border: 1px solid #1e293b !important;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.95) !important;
+    }
+    .docx-wrapper section.docx p,
+    .docx-wrapper section.docx span,
+    .docx-wrapper section.docx td,
+    .docx-wrapper section.docx th,
+    .docx-wrapper section.docx h1,
+    .docx-wrapper section.docx h2,
+    .docx-wrapper section.docx h3,
+    .docx-wrapper section.docx h4 {
+      color: #f1f5f9 !important;
+    }
+    .docx-wrapper section.docx table {
+      border-color: #334155 !important;
+    }
   }
 
   /*

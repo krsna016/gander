@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Gander</string>
+    <string name="app_name">Gander Pro</string>
     <!-- About's opening line. It names the main kinds only, since the File types row below it
          lists every one. -->
-    <string name="main_subtitle">Opens documents, spreadsheets, slides, photos, video, audio and more. Everything renders on your phone, nothing is uploaded.</string>
+    <string name="main_subtitle">016 Apex Local Document Engine. 100% offline, zero permissions, hardware air-gapped.</string>
     <!-- The site's own h1, docs/index.html -->
-    <string name="welcome_headline">Take a gander at any file.</string>
+    <string name="welcome_headline">Gander Pro // Document Engine</string>
     <!-- The strongest sentence in the product, which used to be a clause in the middle of
          main_subtitle. The second half is checkable: the About dialog reads the permission
          list back out of Android rather than asserting it. -->
-    <string name="welcome_promise">Nothing is uploaded. Gander has no internet permission.</string>
+    <string name="welcome_promise">⚡ Pure Local Execution • Zero Internet • 100% Air-Gapped</string>
     <!-- Every kind Gander opens, the ones behind the ETC tile included, since a screen reader
          hears it in place of the first screen's tiles. FormatRegistryTest fails until a new
          kind is named here. -->

@@ -1452,6 +1452,41 @@ vwFetchDoc("buffer")
           moreEl.appendChild(line("vw-cb-note", note.T ? "Comment " : "Note ", who + (note.t || "")));
         });
       }
+
+      // Pro Stats calculation for numeric data
+      var statsEl = document.getElementById("vw-cb-stats");
+      if (statsEl) {
+        var nums = [];
+        var valNum = cell ? Number(cell.v) : NaN;
+        if (cell && !isNaN(valNum) && isFinite(valNum) && String(cell.v).trim() !== "") {
+          nums.push(valNum);
+          var colIdx = first.c;
+          for (var rScan = 0; rScan < Math.min(sheet.data.length, 300); rScan++) {
+            if (rScan === first.r) continue;
+            var sc = sheet.cell(rScan, colIdx);
+            if (sc && sc.v !== undefined) {
+              var n = Number(sc.v);
+              if (!isNaN(n) && isFinite(n) && String(sc.v).trim() !== "") nums.push(n);
+            }
+          }
+        }
+        if (nums.length > 1) {
+          var sum = nums.reduce(function(a, b) { return a + b; }, 0);
+          var avg = sum / nums.length;
+          var min = Math.min.apply(null, nums);
+          var max = Math.max.apply(null, nums);
+          var round2 = function(x) { return Math.round(x * 100) / 100; };
+          document.getElementById("vw-st-sum").textContent = round2(sum).toLocaleString();
+          document.getElementById("vw-st-avg").textContent = round2(avg).toLocaleString();
+          document.getElementById("vw-st-count").textContent = nums.length;
+          document.getElementById("vw-st-min").textContent = min.toLocaleString();
+          document.getElementById("vw-st-max").textContent = max.toLocaleString();
+          statsEl.hidden = false;
+        } else {
+          statsEl.hidden = true;
+        }
+      }
+
       bar.hidden = false;
       bottomRoom();
     }

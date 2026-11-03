@@ -259,31 +259,47 @@
   #cellbar button.vw-done .vw-icon-copy { display: none; }
   .vw-copy { position: fixed; top: 0; left: -9999px; opacity: 0; }
 
+  .vw-cb-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 6px 10px;
+    margin-top: 6px;
+    background: #090c10;
+    border: 1px solid #1e293b;
+    border-radius: 6px;
+    font-family: -apple-system, BlinkMacSystemFont, "JetBrains Mono", monospace;
+    font-size: 11px;
+    color: #94a3b8;
+  }
+  .vw-st-item { display: inline-flex; align-items: center; gap: 4px; }
+  .vw-st-lbl { color: #38bdf8; font-weight: 700; }
+  .vw-st-val { color: #f1f5f9; font-weight: 600; }
+
   /*
    * A spreadsheet has no paper to be faithful to, unlike a Word page, so the whole thing goes dark
-   * rather than just the surround, in the app's night palette. The gridlines are about 2:1 on the
-   * ground, a little more than Excel's dark sheets give theirs, to read on a phone in a dark room.
+   * rather than just the surround, in the app's night palette.
    */
   @media (prefers-color-scheme: dark) {
     :root {
-      --vw-gridline: #4D4636;
-      --vw-head-ground: #221F19;
-      --vw-head-ink: #B5AC9C;
-      --vw-head-line: #5A5242;
-      --vw-lit-ground: #4A2A22;
-      --vw-bar-line: #4D4636;
-      --vw-freeze: #8F887A;
+      --vw-gridline: #1e293b;
+      --vw-head-ground: #0a0d12;
+      --vw-head-ink: #94a3b8;
+      --vw-head-line: #1e293b;
+      --vw-lit-ground: #0284c7;
+      --vw-bar-line: #1e293b;
+      --vw-freeze: #38bdf8;
     }
-    body { background: var(--vw-ground); }
-    table.vw-t { background: var(--vw-ground); }
-    .vw-t td { color: var(--vw-ink); }
-    #tabs { background: #221F19; }
-    #tabs button { color: var(--vw-head-ink); }
-    #tabs button.active { background: var(--vw-card); color: var(--vw-ink); }
-    #cellbar { background: var(--vw-card); box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.4); }
-    .vw-art-text { background: var(--vw-ground); color: var(--vw-ink); border-color: #5A5242; }
-    .vw-art-missing { background: rgba(34, 31, 25, 0.94); border-color: #5A5242; color: var(--vw-head-ink); }
-    .vw-art-missing b { color: var(--vw-ink); }
+    body { background: #000000; }
+    table.vw-t { background: #000000; }
+    .vw-t td { color: #f1f5f9; }
+    #tabs { background: #0a0d12; border-top: 1px solid #1e293b; }
+    #tabs button { color: #94a3b8; }
+    #tabs button.active { background: #0284c7; color: #ffffff; }
+    #cellbar { background: #0a0d12; border-top: 1px solid #1e293b; box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.95); }
+    .vw-art-text { background: #000000; color: #f1f5f9; border-color: #1e293b; }
+    .vw-art-missing { background: rgba(10, 13, 18, 0.95); border-color: #1e293b; color: #94a3b8; }
+    .vw-art-missing b { color: #f1f5f9; }
   }
 </style>
 <script src="lib/xlsx.full.min.js"></script>
@@ -305,6 +321,13 @@
     <button type="button" class="vw-cb-close" aria-label="Close">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 6.4 17.6 5 12 10.6 6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12 19 6.4z"/></svg>
     </button>
+  </div>
+  <div class="vw-cb-stats" id="vw-cb-stats" hidden>
+    <span class="vw-st-item"><span class="vw-st-lbl">Σ SUM:</span> <span class="vw-st-val" id="vw-st-sum">0</span></span>
+    <span class="vw-st-item"><span class="vw-st-lbl">μ AVG:</span> <span class="vw-st-val" id="vw-st-avg">0</span></span>
+    <span class="vw-st-item"><span class="vw-st-lbl"># COUNT:</span> <span class="vw-st-val" id="vw-st-count">0</span></span>
+    <span class="vw-st-item"><span class="vw-st-lbl">MIN:</span> <span class="vw-st-val" id="vw-st-min">0</span></span>
+    <span class="vw-st-item"><span class="vw-st-lbl">MAX:</span> <span class="vw-st-val" id="vw-st-max">0</span></span>
   </div>
 </div>
 <div id="tabs" role="tablist" aria-label="Sheets" hidden></div>
